@@ -34,27 +34,19 @@ The application handles different types of customer questions using different ap
 
 ### Order-related questions
 User
- ↓
 1. Customer asks: "Where is my order ORD1001?"
- ↓
 2. Streamlit Chatbot
    → Receives the customer's question
- ↓
 3. LangChain Agent
    → Understands the question
    → Identifies it as an order-related question
- ↓
 4. Tool / Function Calling
    → Calls the get_order() function
- ↓
 5. SQLite Database
    → Searches for order ID ORD1001
- ↓
 6. Order Information
    → Returns order ID, product, status, and delivery date
- ↓
 7. Gemini
    → Converts the database information into a simple answer
- ↓
 8. Final Answer
    → Chatbot displays the answer to the customer
