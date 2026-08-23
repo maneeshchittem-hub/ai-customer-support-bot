@@ -34,6 +34,9 @@ def create_database():
 
 
 def get_order(order_id):
+
+    create_database()
+
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
