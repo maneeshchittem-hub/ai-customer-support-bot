@@ -1,17 +1,14 @@
-import os
+import streamlit as st
 
-from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import ToolMessage
 from tools import track_order
 from rag import search_company_policy
 
-load_dotenv()
-
 
 model = ChatGoogleGenerativeAI(
     model="gemini-3.5-flash",
-    api_key=os.getenv("GOOGLE_API_KEY"),
+    api_key=st.secrets["GOOGLE_API_KEY"],
     temperature=0
 )
 
@@ -56,14 +53,8 @@ bank account information, or other sensitive information.
 def chat_with_agent(user_question):
 
     messages = [
-        (
-            "system",
-            SYSTEM_PROMPT
-        ),
-        (
-            "human",
-            user_question
-        )
+        ("system", SYSTEM_PROMPT),
+        ("human", user_question)
     ]
 
     response = model_with_tools.invoke(messages)
@@ -78,27 +69,20 @@ def chat_with_agent(user_question):
             tool_args = tool_call["args"]
 
             if tool_name == "track_order":
-
-                tool_result = track_order.invoke(
-                    tool_args
-                )
+                tool_result = track_order.invoke(tool_args)
 
             elif tool_name == "search_company_policy":
-
-                tool_result = search_company_policy.invoke(
-                    tool_args
-                )
+                tool_result = search_company_policy.invoke(tool_args)
 
             else:
-
                 tool_result = "Unknown tool."
 
             messages.append(
-    ToolMessage(
-        content=str(tool_result),
-        tool_call_id=tool_call["id"]
-    )
-)
+                ToolMessage(
+                    content=str(tool_result),
+                    tool_call_id=tool_call["id"]
+                )
+            )
 
         response = model_with_tools.invoke(messages)
 
