@@ -33,20 +33,28 @@ https://orderpilot-ai.streamlit.app
 The application handles different types of customer questions using different approaches.
 
 ### Order-related questions
-
-```text
 User
  ↓
-Streamlit Chatbot
+1. Customer asks: "Where is my order ORD1001?"
  ↓
-LangChain Agent
+2. Streamlit Chatbot
+   → Receives the customer's question
  ↓
-Tool / Function Calling
+3. LangChain Agent
+   → Understands the question
+   → Identifies it as an order-related question
  ↓
-SQLite Database
+4. Tool / Function Calling
+   → Calls the get_order() function
  ↓
-Order Information
+5. SQLite Database
+   → Searches for order ID ORD1001
  ↓
-Gemini
+6. Order Information
+   → Returns order ID, product, status, and delivery date
  ↓
-Final Answer ```
+7. Gemini
+   → Converts the database information into a simple answer
+ ↓
+8. Final Answer
+   → Chatbot displays the answer to the customer
