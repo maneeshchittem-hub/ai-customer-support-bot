@@ -6,7 +6,6 @@ from langchain_core.messages import ToolMessage
 from tools import track_order
 from rag import search_company_policy
 
-
 load_dotenv()
 
 
