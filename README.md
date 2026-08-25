@@ -50,3 +50,16 @@ User
    → Converts the database information into a simple answer
 8. Final Answer
    → Chatbot displays the answer to the customer
+## Tech Stack
+
+- Python
+- Streamlit
+- Gemini
+- LangChain
+- RAG
+- FAISS
+- SQLite
+
+  ## ```bash
+>pip install -r requirements.txt
+>streamlit run app.py
